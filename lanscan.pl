@@ -14,12 +14,8 @@ $| = 1;
 binmode STDOUT, ":utf8";
 
 #console colors
-my $rd  = color('red');
-my $gr  = color('green');
-my $cn  = color('cyan');
-my $bld = color('bold');
-my $rst = color('reset');
-my $ndr = color('underline');
+my ($rd, $gr, $cn)  = (color('red'), color('green'), color('cyan'));
+my ($bld, $rst, $ndr) = (color('bold'), color('reset'), color('underline'));
 my $ar  = $bld . "→" . $rst;
 
 my $cidr;
