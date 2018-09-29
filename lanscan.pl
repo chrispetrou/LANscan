@@ -74,10 +74,12 @@ close $nmap;
 foreach my $line (`arp -a`){
   chomp $line;
   if ($line =~ m/.*($ip_ptrn).*($mac_ptrn).*/gim){
-    if ( $1 ~~ @ips ){
-      say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2) . " $ar $gr active $rst");
-    }else{
-      say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2));
+    if ($2 !~ m/[ff:]{5}[ff]/i){
+      if ( $1 ~~ @ips ){
+        say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2) . " $ar $gr active $rst");
+      }else{
+        say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2));
+      }
     }
   }
 }
