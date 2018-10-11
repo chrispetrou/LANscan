@@ -22,13 +22,14 @@ my $cidr;
 GetOptions ("subnet=s" => \$cidr);
 
 if (!defined $cidr){
-  say $bld . "┌═══════════┐" .$rst;
-  say $bld . "│  LANscan  │" .$rst;
-  say $bld . "└═══════════┘" .$rst . $rd. "...v1.0" . $rst;
-  say '-' x 38;
-  say("$0 -s/-subnet <CIDR>");
-  say($bld."Example:".$rst." $0 -s 192.168.10.0/24");
-  say '═' x 38;
+  say($bld . "┌═══════════┐" .$rst . "\n".
+      $bld . "│  LANscan  │" .$rst . "\n".
+      $bld . "└═══════════┘" .$rst . $rd . "...v1.0" . $rst.
+      "\n" . '-' x 38 .
+      "\n" . "$0 -s/-subnet <CIDR>\n" .
+      $bld . "Example:" . $rst . " $0 -s 192.168.10.0/24" .
+      "\n" . '═' x 38
+      );
   exit 1;
 }
 
