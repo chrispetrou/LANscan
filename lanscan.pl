@@ -42,11 +42,24 @@ my $ip_ptrn = qr{\b(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.
                    (?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.
                    (?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\b}x;
 
+sub gateway {
+  if ($^O eq "darwin") {
+    `route -n get default | grep gateway` =~ /($ip_ptrn)/;
+    return $1;
+  } elsif ($^O eq "MSWin32") {
+    `ipconfig | findstr /i "Gateway"` =~ /($ip_ptrn)/;
+    return $1;
+  } else { # linux
+    `ip route | grep default` =~ /($ip_ptrn)/;
+    return $1;
+  }
+}
+
 sub getCompany {
   my $json_obj = parse_json ($_[0]);
   if (exists $json_obj->{'result'}{'company'}){
     return $json_obj->{'result'}{'company'}
-  }else{
+  } else {
     return $rd . "Unknown" . $rst;
   }
 }
@@ -66,14 +79,21 @@ while (<$nmap>) {
 }
 close $nmap;
 
+# get the geteway...
+my $gateway = &gateway();
+
 # Dump the ARP-cache and get the vendors...
 foreach my $line (`arp -a`){
   chomp $line;
-  if ($line =~ m/.*($ip_ptrn).*($mac_ptrn).*/gim){
-    if ($2 !~ m/[ff:]{5}[ff]/i){
-      if ( $1 ~~ @ips ){
-        say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2) . " $ar $gr active $rst");
-      }else{
+  if ($line =~ m/.*($ip_ptrn).*($mac_ptrn).*/gim) {
+    if ($2 !~ m/[ff:]{5}[ff]/i) {
+      if ( $1 ~~ @ips ) {
+        if ($1 eq $gateway) {
+          say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2) . " $ar $gr active $rst"."(".$rd."gateway".$rst.")");
+        } else {
+          say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2) . " $ar $gr active $rst");
+        }
+      } else {
         say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2));
       }
     }
