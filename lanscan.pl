@@ -84,9 +84,9 @@ close $nmap;
 my $gateway = &gateway();
 
 # Dump the ARP-cache and get the vendors...
-foreach my $line (`arp -a`){
-  chomp $line;
-  if ($line =~ m/.*($ip_ptrn).*($mac_ptrn).*/gim) {
+foreach (`arp -a`){
+  chomp;
+  if (m/.*($ip_ptrn).*($mac_ptrn).*/gim) {
     if ($2 !~ m/[ff:]{5}[ff]/i) {
       if ( $1 ~~ @ips ) {
         if ($1 eq $gateway) {
