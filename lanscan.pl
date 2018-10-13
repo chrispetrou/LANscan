@@ -74,9 +74,7 @@ sub macvendor {
 my @ips = ();
 open(my $nmap, '-|', "nmap -sn $cidr") or die $!;
 while (<$nmap>) {
-  if (/($ip_ptrn)/) {
-    push @ips, $1;
-  }
+  push @ips, $1 if (/($ip_ptrn)/);
 }
 close $nmap;
 
