@@ -87,14 +87,9 @@ foreach (`arp -a`){
   if (m/.*($ip_ptrn).*($mac_ptrn).*/gim) {
     if ($2 !~ m/[ff:]{5}[ff]/i) {
       if ( $1 ~~ @ips ) {
-        if ($1 eq $gateway) {
-          say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2) . " $ar $gr active $rst"."(".$rd."gateway".$rst.")");
-        } else {
-          say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2) . " $ar $gr active $rst");
-        }
-      } else {
-        say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2));
-      }
+        if ($1 eq $gateway) { say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2) . " $ar $gr active $rst"."(".$rd."gateway".$rst.")"); }
+        else { say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2) . " $ar $gr active $rst"); }
+      } else { say($ndr . "$1" . $rst . " $ar $2 $ar " . &macvendor($2)); }
     }
   }
 }
