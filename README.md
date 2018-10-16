@@ -4,6 +4,10 @@
 
 <img src="images/lanscan.png" width="70%">
 
+#### Sample output:
+
+<img src="images/example.png" width="70%">
+
 ### Requirements:
 
 To install the requirements:
