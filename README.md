@@ -8,7 +8,7 @@
 
 <img src="images/lanscan.png" width="70%">
 
-#### Sample output:
+### Sample output:
 
 <img src="images/example.png" width="70%">
 
