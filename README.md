@@ -1,7 +1,7 @@
 <img src="images/logo.png" width="30%">
 
 [![GPLv3 license](https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square)](https://github.com/chrispetrou/LANscan/blob/master/LICENSE) ![Programmed with](https://img.shields.io/badge/Made%20with-Perl-blueviolet?style=flat-square)
-![version](https://img.shields.io/badge/version-1.0-lightgray.svg?style=flat-square) 
+![version](https://img.shields.io/badge/version-1.1-lightgray?style=flat-square)
 
 * * *
 
