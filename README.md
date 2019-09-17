@@ -11,7 +11,9 @@
 
 ### Sample output:
 
-<img src="images/example.png" width="70%">
+<img src="images/preview.svg" width="70%">
+
+<sup><sub>The above results have been altered of course!</sub></sup>
 
 ### Requirements:
 
